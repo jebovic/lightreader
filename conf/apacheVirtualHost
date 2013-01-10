@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    <Directory /path/to/web/directory>
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+    DirectoryIndex index.php
+    RewriteEngine On
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME} !-f
+    RewriteRule ^ /index.php [L]
+    DocumentRoot /path/to/web/directory
+    ServerName yourdomain.local
+</VirtualHost>

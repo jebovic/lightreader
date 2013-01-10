@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <link href="{{ app.request.basepath }}/css/style.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/script.js"></script>
+        <title>{% block title %}Welcome to Silex Sandbox{% endblock %}</title>
+    </head>
+    <body>
+    	{% block menu %}
+    		{% include 'menu.html.twig' %}
+		{% endblock %}
+        <div id="content">{% block content %}{% endblock %}</div>
+    </body>
+</html>

@@ -1,0 +1,5 @@
+<ul class="links">
+	{% for link in links %}
+    	<li><a href="{{ link.href }}" id="{{ link.id }}">{{ link.name }}</a></li>
+	{% endfor %}
+</ul>
