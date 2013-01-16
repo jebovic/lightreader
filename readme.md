@@ -31,70 +31,37 @@ With very small efforts you should be able to add some pretty features to this a
 Here are some examples...
 
 ### Add sites
-Adding a site is quite simple. Just add a service into src/LightReader/Services/Sites/ directory. For example :
+Adding a site is quite simple. Just modify configuration in src/LightReader/Config/sites.yml config file. For example :
 
-```php
-<?php
+```yaml
+dtc:                              #Route name, used for routing
+    title: 'Dans ton chat'        #Used for page title
+    shortTitle: 'DTC'             #Menu link name
+    url: 'http://danstonchat.com' #URL to grab
+    urlPage: '/latest/%d.html'    #Pagination format, "%d" replaced by page number according to pageFormat parameter
+    pageFormat: '%d'              #Used to handle different ways to paginate (page number, offset...) %d is page number
+    grabSelector: '.item-content' #CSS selector for content to grab
+    allowedTags: '<br><span>'     #All tags are stripped, except for allowedTags parameter
+    routeName: 'dtc'              #Main route name for this site, used only for url generator
+    randomRouteName: 'dtc_random' #Route name if a random post request is enabled, false if not
+    urlRandom: '/random.html'     #Random URL to grab
+```
+Routes and menu links will be generated automaticaly
 
-namespace LightReader\Services\Sites;
+Application settings
+--------------------
+You will find the config file fore LightReader in src/LightReader/Config/app.yml config file :
 
-use LightReader\Services\Curl\CurlService;
-use Symfony\Component\DomCrawler\Crawler;
-use LightReader\Services\Sites\SiteService;
-
-class ExampleService extends SiteService
-{
-	protected $url;
-	protected $urlPage;
-	protected $urlRandom;
-	protected $page;
-	protected $pageFormat;
-	protected $grabSelector;
-	protected $allowedTags;
-	protected $app;
-	protected $latestName;
-	protected $randomName;
-
-	function __construct( $app, $page = null )
-	{
-		$this->url          = 'http://example.com';
-		$this->urlPage      = '/latest/%d.html';
-		$this->urlRandom    = '/random.html';
-		$this->page         = $page;
-		$this->pageFormat   = $page;
-		$this->grabSelector = '.item-content';
-		$this->allowedTags  = '<br><span>';
-		$this->app          = $app;
-		$this->latestName   = 'example';
-		$this->randomName   = 'example_random';
-	}
-}
+```yaml
+title: 'Light Reader v0'          #Application name, used for page title and home page H1
+nextLink: 'Next'                  #Next link name
+prevLink: 'Previous'              #Previous link name
+randomLink: 'Random'              #Random link name
 ```
 
-Then you have to define a new route into the src/LightReader/routing.php
-```php
-$app->get('/example/latest/{page}', function ($page) use ($app) {
-    $dtc = new ExampleService( $app, $page );
-    $pageInfos = array(
-        'title' => sprintf('Example page title - #%s', $page),
-        'active' => 'example' );
-    $result = $dtc->displayLatest( (int) $page ) + array( 'page' => $pageInfos );
-    return $app['twig']->render('content.html.twig', $result);
-})
-->assert('page', '\d+')
-->value('page', 1)
-->bind('example');
-$menu_links[] = array( 'example', 'DTC');
-
-$app->get('/example/random', function () use ($app) {
-    $dtc = new ExampleService( $app );
-    $pageInfos = array(
-        'title' => 'Random quotes from your example site',
-        'active' => 'example_random' );
-    $result = $dtc->displayRandom() + array( 'page' => $pageInfos );
-    return $app['twig']->render('content.html.twig', $result);
-})
-->bind('example_random');
-$menu_links[] = array( 'example_random', 'Your example site Random');
-```
-The menu links will be generated automaticaly
+TODO
+----
+In a very short time :
+* Create three design (HTML, XML, and Mobile design)
+* Allow connection through proxy with login/pwd authentication
+* Find a better way to allow regexp pagination in configuration files
