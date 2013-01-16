@@ -12,7 +12,7 @@ use LightReader\Config\Loader\YamlSitesLoader;
 /**
 * Abstract Class : load config files helper
 */
-abstract class ConfigLoader
+class ConfigLoader
 {
     protected $cachePath;
     protected $configDirectories;

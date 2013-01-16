@@ -1,8 +1,7 @@
 <?php
 
 use Silex\Provider\UrlGeneratorServiceProvider;
-use LightReader\Config\Loader\SitesConfigLoader;
-use LightReader\Config\Loader\AppConfigLoader;
+use LightReader\Config\Loader\ConfigLoader;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -16,9 +15,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 // Load configuration
-$sitesLoader     = new SitesConfigLoader();
+$sitesLoader     = new ConfigLoader( __DIR__.'/LightReader/Config/Cache/sites.cache.php', 'sites.yml' );
 $app['sites']    = $sitesLoader->getConfig();
-$appConfigLoader = new AppConfigLoader();
+$appConfigLoader = new ConfigLoader( __DIR__.'/LightReader/Config/Cache/app.cache.php', 'app.yml' );
 $app['config']   = $appConfigLoader->getConfig();
 
 // routing definitions
