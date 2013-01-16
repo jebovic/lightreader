@@ -26,9 +26,11 @@ class SiteService
     {
         // @TODO : Find a best way to allow pagination format in config file
         eval('$pageFormat = '.$this->pageFormat. ';');
-        $url = $this->siteParams['url'] . sprintf( $this->siteParams['urlPage'], $pageFormat );
+        $url  = $this->siteParams['url'] . sprintf( $this->siteParams['urlPage'], $pageFormat );
         $curl = new CurlService();
-        $curl = $curl->setOptions( array( CURLOPT_URL => $url ) );
+        $curl = $curl
+                    ->setProxy( $this->appConfig['proxy'] )
+                    ->setOptions( array( CURLOPT_URL => $url ) );
         $grab = $curl->grab();
         $curl->close();
         $content = $this->formatRaw( $grab, $this->siteParams['grabSelector'] );

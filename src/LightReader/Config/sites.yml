@@ -7,8 +7,8 @@ dtc:                                           #Route name, used for routing
     grabSelector: '.item-content'              #CSS selector for content to grab
     allowedTags: '<br><span>'                  #All tags are stripped, except for allowedTags parameter
     routeName: 'dtc'                           #Main route name for this site, used only for url generator
-    randomRouteName: 'dtc_random'              #Route name if a random post request is enabled, false if not
-    urlRandom: '/random.html'                  #Random URL to grab
+    randomRouteName: 'dtc_random'              #Route name if a random post request is enabled, delete parameter if not
+    urlRandom: '/random.html'                  #Random URL to grab, delete parameter if no random post request enabled
 eab:
     title: 'Entendu au boulot'
     shortTitle: 'EAB'

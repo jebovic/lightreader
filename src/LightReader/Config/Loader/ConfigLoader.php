@@ -82,10 +82,38 @@ abstract class ConfigLoader
         $code = '<?php  return array(';
         foreach ($configValues as $configValue) {
             foreach ($configValue as $paramName => $paramValue) {
-                $code .= sprintf('"%1s" => "%2s",', $paramName, $paramValue);
+                if ( is_array( $paramValue ) )
+                {
+                    $code .= sprintf('"%1s" => array(', $paramName);
+                    foreach ($paramValue as $subParamName => $subParamValue)
+                    {
+                        $code .= $this->generatePHPLine($subParamName, $subParamValue);
+                    }
+                    $code .= '),';
+                }
+                else
+                {
+                    $code .= $this->generatePHPLine($paramName, $paramValue);
+                }
             }
         }
         $code .= ');';
         return $code;
+    }
+
+    /**
+     * Generate a hash line for an array
+     * @param  string $paramName  Parameter name
+     * @param  mixed  $paramValue Parameter value
+     * @return string             Generated line for hash
+     */
+    protected function generatePHPLine( $paramName, $paramValue )
+    {
+        if (is_bool($paramValue))
+        {
+            $paramValue = ($paramValue) ? "true" : "false";
+            return sprintf('"%1s" => %2s,', $paramName, $paramValue);
+        }
+        return sprintf('"%1s" => "%2s",', $paramName, $paramValue);
     }
 }

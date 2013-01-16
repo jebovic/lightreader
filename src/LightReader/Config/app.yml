@@ -2,3 +2,8 @@ title: 'Light Reader v0'                   #Name of application, used for page t
 nextLink: 'Next'                           #Next link name
 prevLink: 'Previous'                       #Previous link name
 randomLink: 'Random'                       #Random link name
+proxy:
+    url: false                             #Proxy URL, false if not needed
+    port: false                            #Proxy port, false if not needed
+    user: false                            #Proxy username, false if not needed
+    password: false                        #Proxy password, false if not needed
