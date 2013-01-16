@@ -1,4 +1,4 @@
-LightReader Readme
+﻿LightReader Readme
 =================
 
 LightReader has been developed just for fun. It's not a real application with cool features, it is just a base idea with few lines of code and good way to discover the great [Silex](http://silex.sensiolabs.org "Silex") PHP Micro-Framework.

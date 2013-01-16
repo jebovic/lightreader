@@ -1,0 +1,56 @@
+dtc:
+    title: 'Dans ton chat'                     #Used for page title
+    shortTitle: 'DTC'                          #Menu link name
+    url: 'http://danstonchat.com'              #URL to grab
+    urlPage: '/latest/%d.html'                 #Pagination format, "%d" replaced by page number according to pageFormat parameter
+    pageFormat: '%d'                           #Used to handle different ways to paginate (page number, offset...) %d is page number
+    grabSelector: '.item-content'              #CSS selector for content to grab
+    allowedTags: '<br><span>'                  #All tags are stripped, except for allowedTags parameter
+    nextLink: 'Next'                           #Next link name
+    prevLink: 'Previous'                       #Previous link name
+    routeName: 'dtc'                           #Main route name for this site
+    randomRouteName: 'dtc_random'              #Route name if a random post request is enabled, false if not
+    urlRandom: '/random.html'                  #Random URL to grab
+    randomLink: 'Random'                       #Random link name
+eab:
+    title: 'Entendu au boulot'
+    shortTitle: 'EAB'
+    url: 'http://entenduauboulot.fr'
+    urlPage: '/page/%d'
+    pageFormat: '(%d-1)*10'
+    grabSelector: 'article > p'
+    allowedTags: ''
+    nextLink: 'Next'
+    prevLink: 'Previous'
+    routeName: 'eab'
+    randomRouteName: 'eab_random'
+    urlRandom: '/aleatoire'
+    randomLink: 'Random'
+pb:
+    title: 'Personal branling'
+    shortTitle: 'Personal branling'
+    url: 'http://personalbranling.tumblr.com'
+    urlPage: '/page/%d'
+    pageFormat: '%d'
+    grabSelector: '.post-content'
+    allowedTags: '<img><div>'
+    nextLink: 'Next'
+    prevLink: 'Previous'
+    routeName: 'pb'
+    randomRouteName: 'pb_random'
+    urlRandom: '/random'
+    randomLink: 'Random'
+vdm:
+    title: 'Vie de merde'
+    shortTitle: 'VDM'
+    url: 'http://www.viedemerde.fr'
+    urlPage: '/?page=%d'
+    pageFormat: '%d-1'
+    grabSelector: '.article > p'
+    allowedTags: ''
+    nextLink: 'Next'
+    prevLink: 'Previous'
+    routeName: 'vdm'
+    randomRouteName: 'vdm_random'
+    urlRandom: '/aleatoire'
+    randomLink: 'Random'

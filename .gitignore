@@ -1,4 +1,4 @@
-###SublimeText###
+﻿###SublimeText###
  
 # SublimeText project files
 /*.sublime-project
@@ -6,3 +6,4 @@
 sftp-config*.json
 
 /vendor
+composer.lock

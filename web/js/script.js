@@ -1,6 +1,8 @@
 function navigate( id ) {
-   link = document.getElementById( id );
-   window.location.href = link.href;
+   if ( link = document.getElementById( id ) )
+   {
+        window.location.href = link.href;
+   }
 }
 
 document.onkeydown = function(evt) {
