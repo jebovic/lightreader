@@ -1,0 +1,4 @@
+title: 'Light Reader v0'                   #Name of application, used for page title and home page H1
+nextLink: 'Next'                           #Next link name
+prevLink: 'Previous'                       #Previous link name
+randomLink: 'Random'                       #Random link name

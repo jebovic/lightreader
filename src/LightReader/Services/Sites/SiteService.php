@@ -11,6 +11,7 @@ class SiteService
     private $page;
     private $pageFormat;
     private $app;
+    private $appConfig;
 
     function __construct( \Silex\Application $app, $page = null, array $siteParams )
     {
@@ -18,6 +19,7 @@ class SiteService
         $this->page       = $page;
         $this->pageFormat = sprintf($siteParams['pageFormat'], $this->page);
         $this->app        = $app;
+        $this->appConfig  = $app['config'];
     }
 
     public function displayLatest()
@@ -36,13 +38,13 @@ class SiteService
         {
             $links[] = array(
                 'href' => $this->app['url_generator']->generate($this->siteParams['routeName'], array( 'page' => $this->page-1 )),
-                'name' => $this->siteParams['prevLink'],
+                'name' => $this->appConfig['prevLink'],
                 'id'   => 'prev'
             );
         }
         $links[] = array(
             'href' => $this->app['url_generator']->generate($this->siteParams['routeName'], array( 'page' => $this->page+1 )),
-            'name' => $this->siteParams['nextLink'],
+            'name' => $this->appConfig['nextLink'],
             'id'   => 'next'
             );
 
@@ -63,7 +65,7 @@ class SiteService
         $links = array();
         $links[] = array(
             'href' => $this->app['url_generator']->generate($this->siteParams['randomRouteName'], array()),
-            'name' => $this->siteParams['randomLink'],
+            'name' => $this->appConfig['randomLink'],
             'id'   => 'random'
             );
 

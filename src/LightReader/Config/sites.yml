@@ -1,4 +1,4 @@
-dtc:
+dtc:                                           #Route name, used for routing
     title: 'Dans ton chat'                     #Used for page title
     shortTitle: 'DTC'                          #Menu link name
     url: 'http://danstonchat.com'              #URL to grab
@@ -6,12 +6,9 @@ dtc:
     pageFormat: '%d'                           #Used to handle different ways to paginate (page number, offset...) %d is page number
     grabSelector: '.item-content'              #CSS selector for content to grab
     allowedTags: '<br><span>'                  #All tags are stripped, except for allowedTags parameter
-    nextLink: 'Next'                           #Next link name
-    prevLink: 'Previous'                       #Previous link name
-    routeName: 'dtc'                           #Main route name for this site
+    routeName: 'dtc'                           #Main route name for this site, used only for url generator
     randomRouteName: 'dtc_random'              #Route name if a random post request is enabled, false if not
     urlRandom: '/random.html'                  #Random URL to grab
-    randomLink: 'Random'                       #Random link name
 eab:
     title: 'Entendu au boulot'
     shortTitle: 'EAB'
@@ -20,12 +17,9 @@ eab:
     pageFormat: '(%d-1)*10'
     grabSelector: 'article > p'
     allowedTags: ''
-    nextLink: 'Next'
-    prevLink: 'Previous'
     routeName: 'eab'
     randomRouteName: 'eab_random'
     urlRandom: '/aleatoire'
-    randomLink: 'Random'
 pb:
     title: 'Personal branling'
     shortTitle: 'Personal branling'
@@ -34,12 +28,9 @@ pb:
     pageFormat: '%d'
     grabSelector: '.post-content'
     allowedTags: '<img><div>'
-    nextLink: 'Next'
-    prevLink: 'Previous'
     routeName: 'pb'
     randomRouteName: 'pb_random'
     urlRandom: '/random'
-    randomLink: 'Random'
 vdm:
     title: 'Vie de merde'
     shortTitle: 'VDM'
@@ -48,9 +39,15 @@ vdm:
     pageFormat: '%d-1'
     grabSelector: '.article > p'
     allowedTags: ''
-    nextLink: 'Next'
-    prevLink: 'Previous'
     routeName: 'vdm'
     randomRouteName: 'vdm_random'
     urlRandom: '/aleatoire'
-    randomLink: 'Random'
+grq:
+    title: 'Good reads popular quotes'
+    shortTitle: 'Good reads'
+    url: 'http://www.goodreads.com/quotes'
+    urlPage: '?page=%d'
+    pageFormat: '%d'
+    grabSelector: '.quoteText'
+    allowedTags: ''
+    routeName: 'grq'

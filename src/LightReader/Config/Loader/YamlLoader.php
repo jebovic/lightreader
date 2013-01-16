@@ -5,7 +5,7 @@ namespace LightReader\Config\Loader;
 use Symfony\Component\Config\Loader\FileLoader;
 use Symfony\Component\Yaml\Yaml;
 
-class YamlSitesLoader extends FileLoader
+class YamlLoader extends FileLoader
 {
     public function load($resource, $type = null)
     {

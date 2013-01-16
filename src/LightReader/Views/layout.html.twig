@@ -3,7 +3,7 @@
     <head>
         <link href="{{ app.request.basepath }}/css/style.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="{{ app.request.basepath }}/js/script.js"></script>
-        <title>{% block title %}Welcome to Silex Sandbox{% endblock %}</title>
+        <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
     </head>
     <body>
     	{% block menu %}

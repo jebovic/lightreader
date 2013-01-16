@@ -6,13 +6,11 @@ $menu_links = array();
 
 $app->get('/', function () use ($app) {
     $result = array(
-        'content' => array('hello you !'),
-        'links' => array(),
         'page' => array(
             'title' => 'Home Page',
             'active' => 'index' )
         );
-    return $app['twig']->render('content.html.twig', $result);
+    return $app['twig']->render('index.html.twig', $result);
 })
 ->bind('index');
 $menu_links[] = array( 'index', 'Home Page');
