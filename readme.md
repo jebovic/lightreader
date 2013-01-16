@@ -57,11 +57,15 @@ title: 'Light Reader v0'          #Application name, used for page title and hom
 nextLink: 'Next'                  #Next link name
 prevLink: 'Previous'              #Previous link name
 randomLink: 'Random'              #Random link name
+proxy:
+    url: false                    #Proxy URL, false if not needed
+    port: false                   #Proxy port, false if not needed
+    user: false                   #Proxy username, false if not needed
+    password: false               #Proxy password, false if not needed
 ```
 
 TODO
 ----
 In a very short time :
 * Create three design (HTML, XML, and Mobile design)
-* Allow connection through proxy with login/pwd authentication
-* Find a better way to allow regexp pagination in configuration files
+* Find a better way to allow regexp pagination format in configuration files
