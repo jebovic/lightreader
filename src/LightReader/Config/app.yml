@@ -1,5 +1,5 @@
 title: 'Light Reader v0'                   #Name of application, used for page title and home page H1
-design: html                                #Choose a design, available design : html|xml
+design: 'html'                             #Choose a design, available design : html|xml
 nextLink: 'Next'                           #Next link name
 prevLink: 'Previous'                       #Previous link name
 randomLink: 'Random'                       #Random link name
