@@ -54,7 +54,7 @@ You will find the config file fore LightReader in src/LightReader/Config/app.yml
 
 ```yaml
 title: 'Light Reader v0'          #Application name, used for page title and home page H1
-design: html                      #Choose a design, available design : html|xml
+design: 'html'                    #Choose a design, available : html|xml
 nextLink: 'Next'                  #Next link name
 prevLink: 'Previous'              #Previous link name
 randomLink: 'Random'              #Random link name
