@@ -1,13 +1,13 @@
-{% extends 'layout.html.twig' %}
+{% extends 'html/layout.html.twig' %}
 
 {% block title %}
     {{ parent() }} / {{ page.title }}
 {% endblock %}
 
 {% block content %}
-    {% include 'links.html.twig' %}
+    {% include 'html/links.html.twig' %}
     {% for item in content %}
         <div class="item">{{item|raw}}</div>
     {% endfor %}
-    {% include 'links.html.twig' %}
+    {% include 'html/links.html.twig' %}
 {% endblock %}

@@ -59,7 +59,9 @@ class SiteService
     {
         $url = $this->siteParams['url'] . $this->siteParams['urlRandom'];
         $curl = new CurlService();
-        $curl = $curl->setOptions( array( CURLOPT_URL => $url ) );
+        $curl = $curl
+                    ->setProxy( $this->appConfig['proxy'] )
+                    ->setOptions( array( CURLOPT_URL => $url ) );
         $grab = $curl->grab();
         $curl->close();
         $content = $this->formatRaw( $grab, $this->siteParams['grabSelector'] );

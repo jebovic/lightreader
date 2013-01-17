@@ -27,7 +27,7 @@ pb:
     urlPage: '/page/%d'
     pageFormat: '%d'
     grabSelector: '.post-content'
-    allowedTags: '<img><div>'
+    allowedTags: '<img>'
     routeName: 'pb'
     randomRouteName: 'pb_random'
     urlRandom: '/random'

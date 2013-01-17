@@ -1,0 +1,7 @@
+{% extends 'xml/layout.xml.twig' %}
+
+{% block content %}
+    {% for item in content %}
+        <item>{{item|striptags(app.sites[page.site_active].allowedTags)|raw}}</item>
+    {% endfor %}
+{% endblock %}
