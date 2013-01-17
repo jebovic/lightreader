@@ -54,6 +54,7 @@ You will find the config file fore LightReader in src/LightReader/Config/app.yml
 
 ```yaml
 title: 'Light Reader v0'          #Application name, used for page title and home page H1
+design: html                      #Choose a design, available design : html|xml
 nextLink: 'Next'                  #Next link name
 prevLink: 'Previous'              #Previous link name
 randomLink: 'Random'              #Random link name
@@ -67,5 +68,5 @@ proxy:
 TODO
 ----
 In a very short time :
-* Create three design (HTML, XML, and Mobile design)
+* Create responsive design for mobile devices
 * Find a better way to allow regexp pagination format in configuration files
