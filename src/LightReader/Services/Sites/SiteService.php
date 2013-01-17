@@ -9,24 +9,21 @@ class SiteService
 {
     private $siteParams;
     private $page;
-    private $pageFormat;
     private $app;
     private $appConfig;
 
     function __construct( \Silex\Application $app, $page = null, array $siteParams )
     {
         $this->siteParams = $siteParams;
-        $this->page       = $page;
-        $this->pageFormat = sprintf($siteParams['pageFormat'], $this->page);
+        $this->page       = (int) $page;
         $this->app        = $app;
         $this->appConfig  = $app['config'];
     }
 
     public function displayLatest()
     {
-        // @TODO : Find a best way to allow pagination format in config file
-        eval('$pageFormat = '.$this->pageFormat. ';');
-        $url  = $this->siteParams['url'] . sprintf( $this->siteParams['urlPage'], $pageFormat );
+        $pageNumber = (int) $this->siteParams['urlStep'] * ( $this->page - 1 + (int) $this->siteParams['urlFirstPage'] );
+        $url  = $this->siteParams['url'] . sprintf( $this->siteParams['urlPattern'], $pageNumber );
         $curl = new CurlService();
         $curl = $curl
                     ->setProxy( $this->appConfig['proxy'] )

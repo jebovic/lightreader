@@ -24,6 +24,7 @@ foreach ($app['sites'] as $routeName => $siteParams)
 {
     $route = sprintf('/%s/{page}', $routeName);
     $app->get($route, function (Request $Request, $page) use ($app, $routeName, $siteParams, $ext) {
+        if ( $page == 0 ) $page++;
         $response = new Response();
         $response = $response->prepare($Request);
         if ( $ext !== 'html' )

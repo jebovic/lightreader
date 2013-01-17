@@ -2,8 +2,9 @@ dtc:                                           #Route name, used for routing
     title: 'Dans ton chat'                     #Used for page title
     shortTitle: 'DTC'                          #Menu link name
     url: 'http://danstonchat.com'              #URL to grab
-    urlPage: '/latest/%d.html'                 #Pagination format, "%d" replaced by page number according to pageFormat parameter
-    pageFormat: '%d'                           #Used to handle different ways to paginate (page number, offset...) %d is page number
+    urlPattern: '/latest/%d.html'              #Pagination format, "%d" replaced by page number according to pageFormat parameter
+    urlFirstPage: 1                            #Indicate the list pagination begin to 0 or 1
+    urlStep: 1                                 #Indicate step : how much do we have to increment when switching from page n to page n+1
     grabSelector: '.item-content'              #CSS selector for content to grab
     allowedTags: '<br><span>'                  #All tags are stripped, except for allowedTags parameter
     routeName: 'dtc'                           #Main route name for this site, used only for url generator
@@ -13,8 +14,9 @@ eab:
     title: 'Entendu au boulot'
     shortTitle: 'EAB'
     url: 'http://entenduauboulot.fr'
-    urlPage: '/page/%d'
-    pageFormat: '(%d-1)*10'
+    urlPattern: '/page/%d'
+    urlFirstPage: 0
+    urlStep: 10
     grabSelector: 'article > p'
     allowedTags: ''
     routeName: 'eab'
@@ -24,8 +26,9 @@ pb:
     title: 'Personal branling'
     shortTitle: 'Personal branling'
     url: 'http://personalbranling.tumblr.com'
-    urlPage: '/page/%d'
-    pageFormat: '%d'
+    urlPattern: '/page/%d'
+    urlFirstPage: 1
+    urlStep: 1
     grabSelector: '.post-content'
     allowedTags: '<img>'
     routeName: 'pb'
@@ -35,8 +38,9 @@ vdm:
     title: 'Vie de merde'
     shortTitle: 'VDM'
     url: 'http://www.viedemerde.fr'
-    urlPage: '/?page=%d'
-    pageFormat: '%d-1'
+    urlPattern: '/?page=%d'
+    urlFirstPage: 0
+    urlStep: 1
     grabSelector: '.article > p'
     allowedTags: ''
     routeName: 'vdm'
@@ -46,8 +50,9 @@ grq:
     title: 'Good reads popular quotes'
     shortTitle: 'Good reads'
     url: 'http://www.goodreads.com/quotes'
-    urlPage: '?page=%d'
-    pageFormat: '%d'
+    urlPattern: '?page=%d'
+    urlFirstPage: 1
+    urlStep: 1
     grabSelector: '.quoteText'
     allowedTags: ''
     routeName: 'grq'

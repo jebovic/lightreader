@@ -14,6 +14,7 @@ For the time being, you can read content from these sites :
 * VieDeMerde (paginated list of quotes and random quotes)
 * EntenduAuBoulot (paginated list of quotes and random quotes)
 * PersonalBranling (paginated list of posts and random posts)
+* Good Reads Quotes (paginated list of quotes)
 
 Install
 -------
@@ -34,17 +35,18 @@ Here are some examples...
 Adding a site is quite simple. Just modify configuration in src/LightReader/Config/sites.yml config file. For example :
 
 ```yaml
-dtc:                              #Route name, used for routing
-    title: 'Dans ton chat'        #Used for page title
-    shortTitle: 'DTC'             #Menu link name
-    url: 'http://danstonchat.com' #URL to grab
-    urlPage: '/latest/%d.html'    #Pagination format, "%d" replaced by page number according to pageFormat parameter
-    pageFormat: '%d'              #Used to handle different ways to paginate (page number, offset...) %d is page number
-    grabSelector: '.item-content' #CSS selector for content to grab
-    allowedTags: '<br><span>'     #All tags are stripped, except for allowedTags parameter
-    routeName: 'dtc'              #Main route name for this site, used only for url generator
-    randomRouteName: 'dtc_random' #Route name if a random post request is enabled, false if not
-    urlRandom: '/random.html'     #Random URL to grab
+dtc:                                #Route name, used for routing
+    title: 'Dans ton chat'          #Used for page title
+    shortTitle: 'DTC'               #Menu link name
+    url: 'http://danstonchat.com'   #URL to grab
+    urlPattern: '/latest/%d.html'   #Pagination format, "%d" replaced by page number according to pageFormat parameter
+    urlFirstPage: 1                 #Indicate the list pagination begin to 0 or 1
+    urlStep: 1                      #Indicate step : how much do we have to increment when switching from page n to page n+1
+    grabSelector: '.item-content'   #CSS selector for content to grab
+    allowedTags: '<br><span>'       #All tags are stripped, except for allowedTags parameter
+    routeName: 'dtc'                #Main route name for this site, used only for url generator
+    randomRouteName: 'dtc_random'   #Route name if a random post request is enabled, delete parameter if not
+    urlRandom: '/random.html'       #Random URL to grab, delete parameter if no random post request enabled
 ```
 Routes and menu links will be generated automaticaly
 
@@ -53,20 +55,20 @@ Application settings
 You will find the config file fore LightReader in src/LightReader/Config/app.yml config file :
 
 ```yaml
-title: 'Light Reader v0'          #Application name, used for page title and home page H1
-design: 'html'                    #Choose a design, available : html|xml
-nextLink: 'Next'                  #Next link name
-prevLink: 'Previous'              #Previous link name
-randomLink: 'Random'              #Random link name
-proxy:
-    url: false                    #Proxy URL, false if not needed
-    port: false                   #Proxy port, false if not needed
-    user: false                   #Proxy username, false if not needed
-    password: false               #Proxy password, false if not needed
+title: 'Light Reader v0'            #Application name, used for page title and home page H1
+design: 'html'                      #Choose a design, available : html|xml
+nextLink: 'Next'                    #Next link name
+prevLink: 'Previous'                #Previous link name
+randomLink: 'Random'                #Random link name
+proxy:  
+    url: false                      #Proxy URL, false if not needed
+    port: false                     #Proxy port, false if not needed
+    user: false                     #Proxy username, false if not needed
+    password: false                 #Proxy password, false if not needed
 ```
 
 TODO
 ----
 In a very short time :
 * Create responsive design for mobile devices
-* Find a better way to allow regexp pagination format in configuration files
+* Implement configuration validators
