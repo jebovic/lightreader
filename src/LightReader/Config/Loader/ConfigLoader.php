@@ -7,7 +7,10 @@ use Symfony\Component\Config\Loader\LoaderResolver;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\Resource\FileResource;
-use LightReader\Config\Loader\YamlSitesLoader;
+use Symfony\Component\Config\Definition\Processor;
+use LightReader\Config\Loader\YamlLoader;
+use LightReader\Config\Validator\AppConfigurationValidator;
+use LightReader\Config\Validator\SitesConfigurationValidator;
 
 /**
 * Abstract Class : load config files helper
@@ -55,19 +58,36 @@ class ConfigLoader
      */
     protected function writeCache(ConfigCache $matcherCache)
     {
-        $locator            = new FileLocator($this->configDirectories);
+        $locator         = new FileLocator($this->configDirectories);
         $yamlConfigFiles = $locator->locate($this->yamlFileName, null, false);
-        $resources          = array();
-        $configValues       = array();
+        $resources       = array();
+        $configValues    = array();
 
+        // Load config from Yaml config files
         foreach ($yamlConfigFiles as $yamlConfigFile) {
             $loaderResolver   = new LoaderResolver(array(new YamlLoader($locator)));
             $delegatingLoader = new DelegatingLoader($loaderResolver);
             $configValues[]   = $delegatingLoader->load($yamlConfigFile);
             $resources[]      = new FileResource($yamlConfigFile);
         }
-        $cacheContent = $this->generatePHPCode($configValues);
 
+        // Process config validation
+        $baseFileName = basename($this->yamlFileName, ".yml");
+        $processor    = new Processor();
+        switch ($baseFileName) {
+            case 'app':
+                $configuration = new AppConfigurationValidator();
+                break;
+            case 'sites':
+                $configuration = new SitesConfigurationValidator();
+                break;
+        }
+        $processedConfiguration = $processor->processConfiguration(
+            $configuration,
+            $configValues);
+
+        // Genrerate and write cache content
+        $cacheContent = $this->generatePHPCode($processedConfiguration);
         $matcherCache->write($cacheContent, $resources);
         return true;
     }
@@ -80,24 +100,41 @@ class ConfigLoader
     protected function generatePHPCode(array $configValues)
     {
         $code = '<?php  return array(';
-        foreach ($configValues as $configValue) {
-            foreach ($configValue as $paramName => $paramValue) {
-                if ( is_array( $paramValue ) )
-                {
-                    $code .= sprintf('"%1s" => array(', $paramName);
-                    foreach ($paramValue as $subParamName => $subParamValue)
-                    {
-                        $code .= $this->generatePHPLine($subParamName, $subParamValue);
-                    }
-                    $code .= '),';
-                }
-                else
-                {
-                    $code .= $this->generatePHPLine($paramName, $paramValue);
-                }
+        foreach ($configValues as $paramName => $paramValue) {
+            if ( is_array( $paramValue ) )
+            {
+                $code .= $this->generatePHPArray($paramName, $paramValue);
+            }
+            else
+            {
+                $code .= $this->generatePHPLine($paramName, $paramValue);
             }
         }
         $code .= ');';
+        return $code;
+    }
+
+    /**
+     * Generate a hash
+     * @param  string $paramName  Parameter name
+     * @param  mixed  $paramValue Parameter value
+     * @return string             Generated hash
+     */
+    protected function generatePHPArray($paramName, $paramValue)
+    {
+        $code = sprintf('"%1s" => array(', $paramName);
+        foreach ($paramValue as $subParamName => $subParamValue)
+        {
+            if ( is_array($subParamValue) )
+            {
+                $code .= $this->generatePHPArray($subParamName, $subParamValue);
+            }
+            else
+            {
+                $code .= $this->generatePHPLine($subParamName, $subParamValue);
+            }
+        }
+        $code .= '),';
         return $code;
     }
 

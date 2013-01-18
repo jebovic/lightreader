@@ -71,4 +71,4 @@ TODO
 ----
 In a very short time :
 * Create responsive design for mobile devices
-* Implement configuration validators
+* Allow keyboard navigation and menu links for XML design
