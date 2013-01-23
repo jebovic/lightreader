@@ -27,10 +27,6 @@ foreach ($app['sites'] as $routeName => $siteParams)
         if ( $page == 0 ) $page++;
         $response = new Response();
         $response = $response->prepare($Request);
-        if ( $ext !== 'html' )
-        {
-            $response->headers->set('Content-Type', sprintf('application/%s', $ext));
-        }
         $siteService = new SiteService( $app, $page, $siteParams);
         $pageInfos = array(
             'title' => sprintf('%1s - #%2s', $siteParams['title'], $page),
@@ -52,10 +48,6 @@ foreach ($app['sites'] as $routeName => $siteParams)
         $app->get($randomRouteName, function (Request $Request) use ($app, $routeName, $randomRouteName, $siteParams, $ext) {
             $response = new Response();
             $response = $response->prepare($Request);
-            if ( $ext !== 'html' )
-            {
-                $response->headers->set('Content-Type', sprintf('application/%s', $ext));
-            }
             $siteService = new SiteService($app, null, $siteParams);
             $pageInfos = array(
                 'title' => $siteParams['title'] . ' Random',

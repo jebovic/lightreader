@@ -1,36 +1,15 @@
-#menu {
-	position: fixed;
-	width: 200px;
-	padding: 10px 20px;
-	background: #dddddd;
-	right: 0;
-}
-
-#menu ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#content {
-	width: 600px;
-}
-
-#content .item {
-	border-bottom: 1px solid #dddddd;
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-span.decoration {
-	color: #ababab;
-}
-
-ul.links {
-	list-style: none;
-}
-
-ul.links li {
-	display: inline;
-	padding-right: 10px;
-}
+body{ padding: 0; margin: 0;}
+#menu{position: relative; width: auto; padding: 5px;background: #000; border-bottom: 1px solid #555;}
+#menu ul{list-style: none;padding: 0;margin: 0;}
+#menu li{ display: inline; padding: 5px;}
+#menu li.active, #menu li:hover{ border-bottom: 2px solid #dd4b39;}
+#menu li:hover{border-color: #eee;}
+#menu a, #menu a:visited{ color: #bbb; text-decoration: none; font-weight: bold;}
+#menu a:hover{ color: #eee;}
+#menu li.active a{ color: #fff;}
+#content{width: 100%; padding-top: 10px;}
+#content .item{border-bottom: 1px solid #dddddd;padding-bottom: 10px;padding-top: 10px;}
+ul.links{list-style: none;}
+ul.links li{display: inline;padding-right: 10px;}
+/* DTC */
+span.decoration{color: #ababab;}

@@ -1,2 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<channel>{% block content %}{% endblock %}</channel>
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <link href="{{ app.request.basepath }}/css/style.css" type="text/css" rel="stylesheet" />
+        <link href="{{ app.request.basepath }}/css/style-xml.css" type="text/css" rel="stylesheet" />
+        <link href="{{ app.request.basepath }}/css/prettify.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/script.js"></script>
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/prettify/prettify.js"></script>
+        <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
+    </head>
+    <body onload="prettyPrint()">
+        {% block menu %}
+            {% include 'html/menu.html.twig' %}
+        {% endblock %}
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
+
+

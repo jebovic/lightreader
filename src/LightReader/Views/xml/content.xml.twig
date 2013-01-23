@@ -1,7 +1,22 @@
 {% extends 'xml/layout.xml.twig' %}
 
+{% block title %}
+    {{ parent() }} / {{ page.title }}
+{% endblock %}
+
 {% block content %}
-    {% for item in content %}
-        <item>{{item|striptags(app.sites[page.site_active].allowedTags)|raw}}</item>
-    {% endfor %}
+<pre class="prettyprint">
+{% spaceless %}
+{% include 'xml/links.xml.twig' %}
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;channel>
+<br>
+{% for item in content %}
+&lt;item>{{item|striptags(app.sites[page.site_active].allowedTags)|raw}}&lt;/item>
+<br>
+{% endfor %}
+&lt;/channel>
+{% include 'xml/links.xml.twig' %}
+{% endspaceless %}
+</pre>
 {% endblock %}

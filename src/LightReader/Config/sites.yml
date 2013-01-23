@@ -30,7 +30,7 @@ pb:
     urlFirstPage: 1
     urlStep: 1
     grabSelector: '.post-content'
-    allowedTags: '<img>'
+    allowedTags: '<img><div>'
     routeName: 'pb'
     randomRouteName: 'pb_random'
     urlRandom: '/random'
