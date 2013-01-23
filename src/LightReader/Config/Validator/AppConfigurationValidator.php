@@ -48,6 +48,13 @@ class AppConfigurationValidator implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('cache')
+                    ->children()
+                        ->scalarNode('maxage')
+                            ->defaultValue(0)
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

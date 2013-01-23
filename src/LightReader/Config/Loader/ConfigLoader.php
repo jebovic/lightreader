@@ -13,7 +13,7 @@ use LightReader\Config\Validator\AppConfigurationValidator;
 use LightReader\Config\Validator\SitesConfigurationValidator;
 
 /**
-* Abstract Class : load config files helper
+* Load config files helper
 */
 class ConfigLoader
 {
@@ -21,6 +21,7 @@ class ConfigLoader
     protected $configDirectories;
     protected $yamlFileName;
     protected $config;
+    public    $loadedFromCache = true;
 
     /**
      * ConfigLoader constructor
@@ -36,6 +37,7 @@ class ConfigLoader
         $configMatcherCache      = new ConfigCache($this->cachePath, true);
 
         if (!$configMatcherCache->isFresh()) {
+            $this->loadedFromCache = false;
             $this->writeCache($configMatcherCache);
         }
 

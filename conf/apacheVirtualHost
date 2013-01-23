@@ -10,4 +10,17 @@
     RewriteRule ^ /index.php [L]
     DocumentRoot /path/to/web/directory
     ServerName yourdomain.local
+
+    <ifModule mod_headers.c>
+        <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
+            Header set Cache-Control "max-age=2592000, public"
+        </filesMatch>
+        <filesMatch "\.(css)$">
+            Header set Cache-Control "max-age=604800, public"
+        </filesMatch>
+        <filesMatch "\.(js)$">
+            Header set Cache-Control "max-age=604800, public"
+        </filesMatch>
+    </ifModule>
+
 </VirtualHost>

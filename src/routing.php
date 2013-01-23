@@ -4,18 +4,36 @@ use LightReader\Services\Sites\SiteService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-$ext = $app['config']['design'];
-$menu_links = array();
+$ext          = $app['config']['design'];
+$menu_links   = array();
+$cacheMaxAge  = $app['config']['cache']['maxage'];
+$etagMD5      = md5(json_encode($app['config']));
+$cacheExpires = new DateTime();
 
-$app->get('/', function (Request $Request) use ($app, $ext) {
+$cacheExpires->modify( sprintf('+%d seconds', $cacheMaxAge));
+
+$app->get('/', function (Request $Request) use ($app, $ext, $etagMD5, $cacheMaxAge, $cacheExpires) {
     $response = new Response();
+    $response->setMaxAge($cacheMaxAge);
+    $response->setSharedMaxAge($cacheMaxAge);
+    // $response->setETag($etagMD5);
+    $response->setExpires($cacheExpires);
+    $response->setPublic();
+    $response->headers->addCacheControlDirective('must-revalidate', true);
     $response = $response->prepare($Request);
-    $result = array(
-        'page' => array(
-            'title' => 'Home Page',
-            'active' => 'index' )
-        );
-    return $response->setContent( $app['twig']->render('html/index.html.twig', $result) );
+    if ($response->isNotModified($Request)) {
+        // return the 304 Response immediately
+        return $response;
+    }
+    else
+    {
+        $result = array(
+            'page' => array(
+                'title' => 'Home Page',
+                'active' => 'index' )
+            );
+        return $response->setContent( $app['twig']->render('html/index.html.twig', $result) );
+    }
 })
 ->bind('index');
 $menu_links[] = array( 'index', 'Home Page');
@@ -23,17 +41,30 @@ $menu_links[] = array( 'index', 'Home Page');
 foreach ($app['sites'] as $routeName => $siteParams)
 {
     $route = sprintf('/%s/{page}', $routeName);
-    $app->get($route, function (Request $Request, $page) use ($app, $routeName, $siteParams, $ext) {
+    $app->get($route, function (Request $Request, $page) use ($app, $routeName, $siteParams, $ext, $etagMD5, $cacheMaxAge, $cacheExpires) {
         if ( $page == 0 ) $page++;
         $response = new Response();
+        $response->setMaxAge($cacheMaxAge);
+        $response->setSharedMaxAge($cacheMaxAge);
+        // $response->setETag($etagMD5);
+        $response->setExpires($cacheExpires);
+        $response->setPublic();
+        $response->headers->addCacheControlDirective('must-revalidate', true);
         $response = $response->prepare($Request);
-        $siteService = new SiteService( $app, $page, $siteParams);
-        $pageInfos = array(
-            'title' => sprintf('%1s - #%2s', $siteParams['title'], $page),
-            'active' => $routeName,
-            'site_active' => $routeName );
-        $result = $siteService->displayLatest() + array( 'page' => $pageInfos );
-        return $response->setContent( $app['twig']->render(sprintf('%s/content.%s.twig', $ext, $ext), $result) );
+        if ($response->isNotModified($Request)) {
+            // return the 304 Response immediately
+            return $response;
+        }
+        else
+        {
+            $siteService = new SiteService( $app, $page, $siteParams);
+            $pageInfos = array(
+                'title' => sprintf('%1s - #%2s', $siteParams['title'], $page),
+                'active' => $routeName,
+                'site_active' => $routeName );
+            $result = $siteService->displayLatest() + array( 'page' => $pageInfos );
+            return $response->setContent( $app['twig']->render(sprintf('%s/content.%s.twig', $ext, $ext), $result) );
+        }
     })
     ->assert('page', '\d+')
     ->value('page', 1)

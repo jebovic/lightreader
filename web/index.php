@@ -3,4 +3,5 @@
 
 $app = require __DIR__.'/../src/app.php';
 
-$app->run();
+$app['debug'] ? $app->run() : $app['http_cache']->run();
+exit;
