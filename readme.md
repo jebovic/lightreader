@@ -65,10 +65,11 @@ proxy:
     port: false                     #Proxy port, false if not needed
     user: false                     #Proxy username, false if not needed
     password: false                 #Proxy password, false if not needed
+cache:
+    maxage: 120                     #Max age and Expires HTTP header
 ```
 
 TODO
 ----
 In a very short time :
 * Create responsive design for mobile devices
-* Allow keyboard navigation and menu links for XML design

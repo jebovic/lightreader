@@ -7,20 +7,20 @@ use Symfony\Component\HttpFoundation\Request;
 $ext          = $app['config']['design'];
 $menu_links   = array();
 $cacheMaxAge  = $app['config']['cache']['maxage'];
-$etagMD5      = md5(json_encode($app['config']));
+// $etagMD5      = md5(json_encode($app['config']));
 $cacheExpires = new DateTime();
 
 $cacheExpires->modify( sprintf('+%d seconds', $cacheMaxAge));
 
-$app->get('/', function (Request $Request) use ($app, $ext, $etagMD5, $cacheMaxAge, $cacheExpires) {
+$app->get('/', function (Request $Request) use ($app, $ext, $cacheMaxAge, $cacheExpires) {
     $response = new Response();
+    $response = $response->prepare($Request);
+    // $response->setETag($etagMD5);
     $response->setMaxAge($cacheMaxAge);
     $response->setSharedMaxAge($cacheMaxAge);
-    // $response->setETag($etagMD5);
     $response->setExpires($cacheExpires);
     $response->setPublic();
     $response->headers->addCacheControlDirective('must-revalidate', true);
-    $response = $response->prepare($Request);
     if ($response->isNotModified($Request)) {
         // return the 304 Response immediately
         return $response;
@@ -41,16 +41,16 @@ $menu_links[] = array( 'index', 'Home Page');
 foreach ($app['sites'] as $routeName => $siteParams)
 {
     $route = sprintf('/%s/{page}', $routeName);
-    $app->get($route, function (Request $Request, $page) use ($app, $routeName, $siteParams, $ext, $etagMD5, $cacheMaxAge, $cacheExpires) {
+    $app->get($route, function (Request $Request, $page) use ($app, $routeName, $siteParams, $ext, $cacheMaxAge, $cacheExpires) {
         if ( $page == 0 ) $page++;
         $response = new Response();
+        $response = $response->prepare($Request);
+        // $response->setETag($etagMD5);
         $response->setMaxAge($cacheMaxAge);
         $response->setSharedMaxAge($cacheMaxAge);
-        // $response->setETag($etagMD5);
         $response->setExpires($cacheExpires);
         $response->setPublic();
         $response->headers->addCacheControlDirective('must-revalidate', true);
-        $response = $response->prepare($Request);
         if ($response->isNotModified($Request)) {
             // return the 304 Response immediately
             return $response;

@@ -1,5 +1,5 @@
 title: 'Light Reader v0'                   #Name of application, used for page title and home page H1
-design: 'html'                              #Choose a design, available : html|xml
+design: 'xml'                              #Choose a design, available : html|xml
 nextLink: 'Next'                           #Next link name
 prevLink: 'Previous'                       #Previous link name
 randomLink: 'Random'                       #Random link name
@@ -9,4 +9,4 @@ proxy:
     user: false                            #Proxy username, false if not needed
     password: false                        #Proxy password, false if not needed
 cache:
-    maxage: 120                             #Max age and Expires HTTP header
+    maxage: 120                            #Max age and Expires HTTP header
