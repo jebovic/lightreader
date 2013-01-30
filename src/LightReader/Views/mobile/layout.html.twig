@@ -3,6 +3,7 @@
     <head>
         <link href="{{ app.request.basepath }}/css/mobile.css" type="text/css" rel="stylesheet" />
         <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
     <body>
         {% block menu %}
@@ -10,6 +11,8 @@
         {% endblock %}
         {% block links %}{% endblock %}
         <div id="content">{% block content %}{% endblock %}</div>
-        <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
+        {% block javascript %}
+            <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
+        {% endblock %}
     </body>
 </html>

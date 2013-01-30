@@ -1,7 +1,8 @@
 /* General */
-body{padding: 0; margin: 0; font-size: 0.9em;}
+html{font-family: sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-size: 15px;}
+body{padding: 0; margin: 0; background-color: #eee;}
 /* Menu */
-#menu{position: fixed; width: 100%; background: #000; border-bottom: 1px solid #555; z-index: 2;}
+#menu{position: fixed; width: 100%; background: #000; border-bottom: 1px solid #555; z-index: 2; overflow-y: auto;}
 #menu ul{list-style: none;padding: 0;margin: 0;}
 #menu li{ padding: 5px;}
 #menu li.active, #menu li:hover{ border-left: 2px solid #dd4b39;}
@@ -9,18 +10,26 @@ body{padding: 0; margin: 0; font-size: 0.9em;}
 #menu a, #menu a:visited{ display:block; color: #f7f7f7; text-decoration: none; font-weight: bold;}
 #menu a:hover{ color: #fff;}
 #menu li.active a{ color: #fff;}
-#menu a.collapsed, #menu a.expanded{display:block;padding: 5px;position: relative;}
+#menu #menuToggle{display:block;padding: 5px;position: relative;}
 #menu span.right{position: absolute;right: 20px; font-weight: bold;}
 #menuList{display: none;}
+/* Home menu */
+#menuHome{}
+#menuHome ul{list-style: nonde; padding: 0; margin: 0;}
+#menuHome li{display: block; padding: 10px 20px;}
+#menuHome li a{display: block; padding: 10px 20px; background-color: #f7f7f7; text-decoration: none; color: #000;}
+#menuHome li a:hover{color: #dd4b39;}
 /* Pagination */
-#next, #prev{width: 20px;height: 100%;position: fixed;background: #eee;zoom: 1;filter: alpha(opacity=50);opacity: 0.5;color: #000;font-size: 4.5em;font-weight: bold;}
-#next span, #prev span{position: absolute;top: 45%;}
+#next, #prev{width: 25px;font-size: 80px;height: 100%;position: fixed;background: #eee;zoom: 1;filter: alpha(opacity=50);opacity: 0.5;color: #000;font-weight: bold;}
+#next span, #prev span{position: absolute;top: 40%;}
 #next:hover, #prev:hover{background: #ddd;}
 #next{right: 0;}
 #prev{left: 0;}
+/* Home content */
+#homeContent{margin-top: -30px; padding: 0 30px;}
 /* Content */
 #content{padding-top: 30px; background-color: #eee;}
-#content .item{padding: 5px 25px; border-bottom: 1px solid #ddd;}
+#content .item{padding: 5px 30px; border-bottom: 1px solid #ddd;}
 #content .item:nth-child(odd){background-color: #f7f7f7;}
 /* DTC */
 #content .item span.decoration{color: #dd4b39;}

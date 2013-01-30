@@ -20,6 +20,10 @@ Install
 -------
 LightReader is delivered without vendors. So you have to [install composer](http://getcomposer.org/ "Install composer") to install all dependencies.
 
+Set up cache directory :
+* create "cache" directory into application root.
+* Change rights to your apache user for writing cache files
+
 Webserver configuration
 -----------------------
 Please refer to the [silex documentation](http://silex.sensiolabs.org/doc/web_servers.html "Webserver configuration") to set up your webserver.

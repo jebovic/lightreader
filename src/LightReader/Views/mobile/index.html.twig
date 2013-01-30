@@ -5,5 +5,15 @@
 {% endblock %}
 
 {% block menu %}
+{% endblock %}
+
+{% block content %}
+    <div id="homeContent">
+        <h1>Welcome to {{ app.config.title }}</h1>
+        <p>Choose a site in the list below, and enjoy your read.</p>
+    </div>
     {% include 'mobile/menu_expanded.html.twig' %}
+{% endblock %}
+
+{% block javascript %}
 {% endblock %}

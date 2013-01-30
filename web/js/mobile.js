@@ -4,17 +4,18 @@ function toggleVisibility(e) {
     a = document.getElementById('menuAction');
     if(l.style.display == 'block') {
         l.style.display        = 'none';
-        t.className            = 'collapsed';
+        p.className            = 'collapsed';
         a.firstChild.nodeValue = '+';
     }
     else {
         l.style.display        = 'block';
-        t.className            = 'expanded';
+        p.className            = 'expanded';
         a.firstChild.nodeValue = '-';
     }
 }
 
-var t = document.getElementById('menuToggle');
+t = document.getElementById('menuToggle');
+var p = t.parentNode;
 t.addEventListener(
     'click', toggleVisibility, false
 );
