@@ -1,0 +1,8 @@
+<div id="menu">
+	<ul class="menuItems">
+		{% for item in app.menu_links %}
+			<li{% if item[0] == page.active %} class="active"{% endif %}>
+			<a href="{{ app.url_generator.generate( item[0] ) }}">{{ item[1] }}</a></li>
+		{% endfor %}
+	</ul>
+</div>

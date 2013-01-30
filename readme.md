@@ -55,21 +55,16 @@ Application settings
 You will find the config file fore LightReader in src/LightReader/Config/app.yml config file :
 
 ```yaml
-title: 'Light Reader v0'            #Application name, used for page title and home page H1
-design: 'html'                      #Choose a design, available : html|xml
-nextLink: 'Next'                    #Next link name
-prevLink: 'Previous'                #Previous link name
+title: 'Light Reader v0'            #Name of application, used for page title and home page H1
+design: 'mobile'                    #Choose a design, available : html|xml|mobile
+nextLink: '&rsaquo;'                #Next link name
+prevLink: '&lsaquo;'                #Previous link name
 randomLink: 'Random'                #Random link name
-proxy:  
+proxy:
     url: false                      #Proxy URL, false if not needed
     port: false                     #Proxy port, false if not needed
     user: false                     #Proxy username, false if not needed
     password: false                 #Proxy password, false if not needed
 cache:
-    maxage: 120                     #Max age and Expires HTTP header
+    maxage: 120                     #Max age and Expires HTTP headers
 ```
-
-TODO
-----
-In a very short time :
-* Create responsive design for mobile devices

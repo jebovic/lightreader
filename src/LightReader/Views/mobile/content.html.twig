@@ -1,0 +1,15 @@
+{% extends 'mobile/layout.html.twig' %}
+
+{% block title %}
+    {{ parent() }} / {{ page.title }}
+{% endblock %}
+
+{% block links %}
+    {% include 'mobile/links.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    {% for item in content %}
+        <div class="item">{{item|raw}}</div>
+    {% endfor %}
+{% endblock %}

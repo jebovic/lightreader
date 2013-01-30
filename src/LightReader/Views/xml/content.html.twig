@@ -1,4 +1,4 @@
-{% extends 'xml/layout.xml.twig' %}
+{% extends 'xml/layout.html.twig' %}
 
 {% block title %}
     {{ parent() }} / {{ page.title }}
@@ -7,7 +7,7 @@
 {% block content %}
 <pre class="prettyprint">
 {% spaceless %}
-{% include 'xml/links.xml.twig' %}
+{% include 'xml/links.html.twig' %}
 &lt;?xml version="1.0" encoding="UTF-8"?>
 &lt;channel>
 <br>
@@ -16,7 +16,7 @@
 <br>
 {% endfor %}
 &lt;/channel>
-{% include 'xml/links.xml.twig' %}
+{% include 'xml/links.html.twig' %}
 {% endspaceless %}
 </pre>
 {% endblock %}

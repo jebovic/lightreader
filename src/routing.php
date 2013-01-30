@@ -32,7 +32,7 @@ $app->get('/', function (Request $Request) use ($app, $ext, $cacheMaxAge, $cache
                 'title' => 'Home Page',
                 'active' => 'index' )
             );
-        return $response->setContent( $app['twig']->render('html/index.html.twig', $result) );
+        return $response->setContent( $app['twig']->render(sprintf('%s/index.html.twig', $ext), $result) );
     }
 })
 ->bind('index');
@@ -63,7 +63,7 @@ foreach ($app['sites'] as $routeName => $siteParams)
                 'active' => $routeName,
                 'site_active' => $routeName );
             $result = $siteService->displayLatest() + array( 'page' => $pageInfos );
-            return $response->setContent( $app['twig']->render(sprintf('%s/content.%s.twig', $ext, $ext), $result) );
+            return $response->setContent( $app['twig']->render(sprintf('%s/content.html.twig', $ext), $result) );
         }
     })
     ->assert('page', '\d+')
@@ -85,7 +85,7 @@ foreach ($app['sites'] as $routeName => $siteParams)
                 'active' => $randomRouteName,
                 'site_active' => $routeName );
             $result = $siteService->displayRandom() + array( 'page' => $pageInfos );
-            return $response->setContent( $app['twig']->render(sprintf('%s/content.%s.twig', $ext, $ext), $result) );
+            return $response->setContent( $app['twig']->render(sprintf('%s/content.html.twig', $ext), $result) );
         })
         ->bind($randomRouteName);
         $menu_links[] = array( $randomRouteName, $siteParams['shortTitle'] . ' Random');

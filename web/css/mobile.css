@@ -1,0 +1,26 @@
+/* General */
+body{padding: 0; margin: 0; font-size: 0.9em;}
+/* Menu */
+#menu{position: fixed; width: 100%; background: #000; border-bottom: 1px solid #555; z-index: 2;}
+#menu ul{list-style: none;padding: 0;margin: 0;}
+#menu li{ padding: 5px;}
+#menu li.active, #menu li:hover{ border-left: 2px solid #dd4b39;}
+#menu li:hover{border-color: #eee;}
+#menu a, #menu a:visited{ display:block; color: #f7f7f7; text-decoration: none; font-weight: bold;}
+#menu a:hover{ color: #fff;}
+#menu li.active a{ color: #fff;}
+#menu a.collapsed, #menu a.expanded{display:block;padding: 5px;position: relative;}
+#menu span.right{position: absolute;right: 20px; font-weight: bold;}
+#menuList{display: none;}
+/* Pagination */
+#next, #prev{width: 20px;height: 100%;position: fixed;background: #eee;zoom: 1;filter: alpha(opacity=50);opacity: 0.5;color: #000;font-size: 4.5em;font-weight: bold;}
+#next span, #prev span{position: absolute;top: 45%;}
+#next:hover, #prev:hover{background: #ddd;}
+#next{right: 0;}
+#prev{left: 0;}
+/* Content */
+#content{padding-top: 30px; background-color: #eee;}
+#content .item{padding: 5px 25px; border-bottom: 1px solid #ddd;}
+#content .item:nth-child(odd){background-color: #f7f7f7;}
+/* DTC */
+#content .item span.decoration{color: #dd4b39;}

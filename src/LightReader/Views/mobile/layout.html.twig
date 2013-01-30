@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <link href="{{ app.request.basepath }}/css/mobile.css" type="text/css" rel="stylesheet" />
+        <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
+    </head>
+    <body>
+        {% block menu %}
+            {% include 'mobile/menu.html.twig' %}
+        {% endblock %}
+        {% block links %}{% endblock %}
+        <div id="content">{% block content %}{% endblock %}</div>
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
+    </body>
+</html>
