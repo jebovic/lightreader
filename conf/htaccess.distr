@@ -1,0 +1,35 @@
+DirectoryIndex index.php
+
+SetEnv REGISTER_GLOBALS 0
+SetEnv PHP_VER 5_3
+ServerSignature Off
+Options All -Indexes
+Options +FollowSymLinks
+SetEnv TZ Europe/Paris
+AddDefaultCharset UTF-8
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    #RewriteBase /path/to/app
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+<ifModule mod_headers.c>
+    <filesMatch "\.(ico|jpe?g|png|gif|swf)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </filesMatch>
+    <filesMatch "\.(css)$">
+        Header set Cache-Control "max-age=604800, public"
+    </filesMatch>
+    <filesMatch "\.(js)$">
+        Header set Cache-Control "max-age=604800, public"
+    </filesMatch>
+</ifModule>
