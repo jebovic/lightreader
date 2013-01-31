@@ -69,7 +69,7 @@ foreach ($app['sites'] as $routeName => $siteParams)
     ->assert('page', '\d+')
     ->value('page', 1)
     ->bind($routeName);
-    $menu_links[] = array( $routeName, $siteParams['shortTitle']);
+    $menu_links[] = array( $routeName, $siteParams['title']);
 
     if (
         array_key_exists('randomRouteName', $siteParams) && $siteParams['randomRouteName'] != '' && $siteParams['randomRouteName'] != false
@@ -88,7 +88,7 @@ foreach ($app['sites'] as $routeName => $siteParams)
             return $response->setContent( $app['twig']->render(sprintf('%s/content.html.twig', $ext), $result) );
         })
         ->bind($randomRouteName);
-        $menu_links[] = array( $randomRouteName, $siteParams['shortTitle'] . ' Random');
+        $menu_links[] = array( $randomRouteName, $siteParams['title'] . ' Random');
     }
 }
 
