@@ -14,6 +14,20 @@ function toggleVisibility(e) {
     }
 }
 
+function showNextItems( url, pageNumber, addContentIn ) {
+    o = document.getElementById('loading');
+    o.style.display = 'block';
+    r = new XMLHttpRequest();
+    d = document.getElementById(addContentIn);
+    r.open("GET", url + "/" + pageNumber + "/1", true);
+    r.onreadystatechange = function () {
+        if (r.readyState != 4 || r.status != 200) return;
+        d.innerHTML = d.innerHTML + r.responseText;
+        o.style.display = 'none';
+    };
+    r.send();
+}
+
 t = document.getElementById('menuToggle');
 var p = t.parentNode;
 t.addEventListener(

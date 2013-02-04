@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block links %}
-    {% include 'mobile/links.html.twig' %}
+    {% if app.config.infiniteScroll != true %}
+        {% include 'mobile/links.html.twig' %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}

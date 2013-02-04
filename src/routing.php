@@ -40,8 +40,8 @@ $menu_links[] = array( 'index', 'Home Page');
 
 foreach ($app['sites'] as $routeName => $siteParams)
 {
-    $route = sprintf('/%s/{page}', $routeName);
-    $app->get($route, function (Request $Request, $page) use ($app, $routeName, $siteParams, $ext, $cacheMaxAge, $cacheExpires) {
+    $route = sprintf('/%s/{page}/{onlyContent}', $routeName);
+    $app->get($route, function (Request $Request, $page, $onlyContent) use ($app, $routeName, $siteParams, $ext, $cacheMaxAge, $cacheExpires) {
         if ( $page == 0 ) $page++;
         $response = new Response();
         $response = $response->prepare($Request);
@@ -61,13 +61,20 @@ foreach ($app['sites'] as $routeName => $siteParams)
             $pageInfos = array(
                 'title' => sprintf('%1s - #%2s', $siteParams['title'], $page),
                 'active' => $routeName,
-                'site_active' => $routeName );
+                'site_active' => $routeName,
+                'number_next' => $page +1);
             $result = $siteService->displayLatest() + array( 'page' => $pageInfos );
-            return $response->setContent( $app['twig']->render(sprintf('%s/content.html.twig', $ext), $result) );
+            $tpl = sprintf('%s/onlycontent.html.twig', $ext);
+            if ( $onlyContent == 0 )
+            {
+                $tpl = sprintf('%s/content.html.twig', $ext);
+            }
+            return $response->setContent( $app['twig']->render($tpl, $result) );
         }
     })
     ->assert('page', '\d+')
     ->value('page', 1)
+    ->value('onlyContent', 0)
     ->bind($routeName);
     $menu_links[] = array( $routeName, $siteParams['title']);
 

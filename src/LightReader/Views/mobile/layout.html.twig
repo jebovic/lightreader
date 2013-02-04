@@ -1,18 +1,38 @@
 <!DOCTYPE HTML>
 <html lang="fr">
-    <head>
-        <link href="{{ app.request.basepath }}/css/mobile.css" type="text/css" rel="stylesheet" />
-        <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    </head>
-    <body>
-        {% block menu %}
-            {% include 'mobile/menu.html.twig' %}
-        {% endblock %}
-        {% block links %}{% endblock %}
-        <div id="content">{% block content %}{% endblock %}</div>
-        {% block javascript %}
-            <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
-        {% endblock %}
-    </body>
+<head>
+    <link href="{{ app.request.basepath }}/css/mobile.css" type="text/css" rel="stylesheet" />
+    <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+    <div id="loading">&darr; Loading &darr;</div>
+    {% block menu %}
+    {% include 'mobile/menu.html.twig' %}
+    {% endblock %}
+    {% block links %}{% endblock %}
+    <div id="content">{% block content %}{% endblock %}</div>
+    {% block javascript %}
+    <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
+    {% if app.config.infiniteScroll == true %}
+    <script type="text/javascript">
+    var pageToLoad = {{ page.number_next }};
+    document.onscroll = function() {
+        var totalHeight, currentScroll, visibleHeight;
+        if (document.documentElement.scrollTop)
+            { currentScroll = document.documentElement.scrollTop; }
+        else
+            { currentScroll = document.body.scrollTop; }
+        totalHeight   = document.body.offsetHeight;
+        visibleHeight = document.documentElement.clientHeight;
+        if ( totalHeight <= currentScroll + visibleHeight )
+        {
+            showNextItems( "{{ app.url_generator.generate( page.site_active ) }}", pageToLoad, "content");
+            pageToLoad = pageToLoad + 1;
+        }
+    }
+    </script>
+    {% endif %}
+    {% endblock %}
+</body>
 </html>
