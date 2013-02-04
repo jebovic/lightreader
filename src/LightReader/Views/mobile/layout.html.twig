@@ -6,33 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
-    <div id="loading">&darr; Loading &darr;</div>
+    <div id="loading">Loading</div>
+
     {% block menu %}
-    {% include 'mobile/menu.html.twig' %}
+        {% include 'mobile/menu.html.twig' %}
     {% endblock %}
+
     {% block links %}{% endblock %}
-    <div id="content">{% block content %}{% endblock %}</div>
+
+    <div id="content"{% if app.config.infiniteScroll == true %} class="nopadding"{% endif %}>{% block content %}{% endblock %}</div>
+
     {% block javascript %}
-    <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
-    {% if app.config.infiniteScroll == true %}
-    <script type="text/javascript">
-    var pageToLoad = {{ page.number_next }};
-    document.onscroll = function() {
-        var totalHeight, currentScroll, visibleHeight;
-        if (document.documentElement.scrollTop)
-            { currentScroll = document.documentElement.scrollTop; }
-        else
-            { currentScroll = document.body.scrollTop; }
-        totalHeight   = document.body.offsetHeight;
-        visibleHeight = document.documentElement.clientHeight;
-        if ( totalHeight <= currentScroll + visibleHeight )
-        {
-            showNextItems( "{{ app.url_generator.generate( page.site_active ) }}", pageToLoad, "content");
-            pageToLoad = pageToLoad + 1;
-        }
-    }
-    </script>
-    {% endif %}
+        <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
+        {% if app.config.infiniteScroll == true %}
+            <script type="text/javascript">
+            var pageToLoad = {{ page.number_next }};
+            var baseURL    = "{{ app.url_generator.generate( page.site_active ) }}";
+            var processing = 0;
+
+            if(window.addEventListener) { document.addEventListener('DOMMouseScroll', isBottom, false); }
+            document.onmousewheel = isBottom;
+
+            /*document.onscroll = function() {
+                if (processing > 0)
+                    { return false; }
+
+                var totalHeight, currentScroll, visibleHeight;
+                if (document.documentElement.scrollTop)
+                    { currentScroll = document.documentElement.scrollTop; }
+                else
+                    { currentScroll = document.body.scrollTop; }
+
+                totalHeight   = document.body.offsetHeight;
+                visibleHeight = document.documentElement.clientHeight;
+                if ( totalHeight <= (currentScroll + visibleHeight + 100) )
+                {
+                    processing = 1;
+                    showNextItems( "{{ app.url_generator.generate( page.site_active ) }}", pageToLoad, "content");
+                    pageToLoad = pageToLoad + 1;
+                }
+            }*/
+            </script>
+        {% endif %}
     {% endblock %}
 </body>
 </html>

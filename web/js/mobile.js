@@ -13,7 +13,6 @@ function toggleVisibility(e) {
         a.firstChild.nodeValue = '-';
     }
 }
-
 function showNextItems( url, pageNumber, addContentIn ) {
     o = document.getElementById('loading');
     o.style.display = 'block';
@@ -24,8 +23,30 @@ function showNextItems( url, pageNumber, addContentIn ) {
         if (r.readyState != 4 || r.status != 200) return;
         d.innerHTML = d.innerHTML + r.responseText;
         o.style.display = 'none';
+        processing = 0;
     };
     r.send();
+}
+function isBottom(){
+    if (processing > 0)
+        { return false; }
+
+    var totalHeight, currentScroll, visibleHeight;
+
+    if (document.documentElement.scrollTop)
+        { currentScroll = document.documentElement.scrollTop; }
+    else
+        { currentScroll = document.body.scrollTop; }
+
+    totalHeight   = document.body.offsetHeight;
+    visibleHeight = document.documentElement.clientHeight;
+
+    if ( totalHeight <= currentScroll + visibleHeight )
+    {
+        processing = 1;
+        showNextItems( baseURL, pageToLoad, "content");
+        pageToLoad = pageToLoad + 1;
+    }
 }
 
 t = document.getElementById('menuToggle');
