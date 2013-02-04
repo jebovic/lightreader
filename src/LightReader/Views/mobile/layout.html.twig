@@ -26,26 +26,7 @@
 
             if(window.addEventListener) { document.addEventListener('DOMMouseScroll', isBottom, false); }
             document.onmousewheel = isBottom;
-
-            /*document.onscroll = function() {
-                if (processing > 0)
-                    { return false; }
-
-                var totalHeight, currentScroll, visibleHeight;
-                if (document.documentElement.scrollTop)
-                    { currentScroll = document.documentElement.scrollTop; }
-                else
-                    { currentScroll = document.body.scrollTop; }
-
-                totalHeight   = document.body.offsetHeight;
-                visibleHeight = document.documentElement.clientHeight;
-                if ( totalHeight <= (currentScroll + visibleHeight + 100) )
-                {
-                    processing = 1;
-                    showNextItems( "{{ app.url_generator.generate( page.site_active ) }}", pageToLoad, "content");
-                    pageToLoad = pageToLoad + 1;
-                }
-            }*/
+            document.onscroll = isBottom;
             </script>
         {% endif %}
     {% endblock %}
