@@ -2,7 +2,7 @@
 html{font-family: sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-size: 15px;}
 body{padding: 0; margin: 0; background-color: #eee;}
 /* Menu */
-#menu{position: fixed; width: 100%; background: #000; border-bottom: 1px solid #555; z-index: 2; overflow-y: auto;}
+#menu{position: fixed; width: 100%; background: #000; border-bottom: 1px solid #555; z-index: 200; overflow-y: auto;}
 #menu ul{list-style: none;padding: 0;margin: 0;}
 #menu li{ padding: 5px;}
 #menu li.active, #menu li:hover{ border-left: 2px solid #dd4b39;}

@@ -23,10 +23,15 @@
             var pageToLoad = {{ page.number_next }};
             var baseURL    = "{{ app.url_generator.generate( page.site_active ) }}";
             var processing = 0;
-
-            if(window.addEventListener) { document.addEventListener('DOMMouseScroll', isBottom, false); }
+            if(window.addEventListener)
+            {
+                document.addEventListener('scroll', isBottom, false);
+                document.addEventListener('touchend', isBottom, false);
+                document.addEventListener('DOMMouseScroll', isBottom, false);
+            }
+            window.onscroll       = isBottom;
             document.onmousewheel = isBottom;
-            document.onscroll = isBottom;
+            document.onscroll     = isBottom;
             </script>
         {% endif %}
     {% endblock %}

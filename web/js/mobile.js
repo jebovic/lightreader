@@ -32,16 +32,16 @@ function isBottom(){
         { return false; }
 
     var totalHeight, currentScroll, visibleHeight;
-
-    if (document.documentElement.scrollTop)
+    if ( window.pageYOffset != 'undefined')
+        { currentScroll = window.pageYOffset; }
+    else if ( document.documentElement.scrollTop != 'undefined' )
         { currentScroll = document.documentElement.scrollTop; }
-    else
+    else if ( document.body.scrollTop != 'undefined' )
         { currentScroll = document.body.scrollTop; }
 
     totalHeight   = document.body.offsetHeight;
     visibleHeight = document.documentElement.clientHeight;
-
-    if ( totalHeight <= currentScroll + visibleHeight )
+    if ( totalHeight <= currentScroll + visibleHeight + 200 )
     {
         processing = 1;
         showNextItems( baseURL, pageToLoad, "content");
