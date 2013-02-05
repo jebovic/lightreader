@@ -54,7 +54,7 @@ class SiteService
 
     public function displayRandom()
     {
-        $url = $this->siteParams['url'] . $this->siteParams['urlRandom'];
+        $url = $this->siteParams['url'] . $this->siteParams['urlRandom'] . '?ts=' . time();
         $curl = new CurlService();
         $curl = $curl
                     ->setProxy( $this->appConfig['proxy'] )
