@@ -83,17 +83,25 @@ foreach ($app['sites'] as $routeName => $siteParams)
        )
     {
         $randomRouteName = $siteParams['randomRouteName'];
-        $app->get($randomRouteName, function (Request $Request) use ($app, $routeName, $randomRouteName, $siteParams, $ext) {
+        $route = sprintf('/%s/{onlyContent}', $randomRouteName);
+        $app->get($route, function (Request $Request, $onlyContent) use ($app, $routeName, $randomRouteName, $siteParams, $ext) {
             $response = new Response();
             $response = $response->prepare($Request);
             $siteService = new SiteService($app, null, $siteParams);
             $pageInfos = array(
                 'title' => $siteParams['title'] . ' Random',
                 'active' => $randomRouteName,
-                'site_active' => $routeName );
+                'site_active' => $randomRouteName,
+                'number_next' => 0 );
             $result = $siteService->displayRandom() + array( 'page' => $pageInfos );
-            return $response->setContent( $app['twig']->render(sprintf('%s/content.html.twig', $ext), $result) );
+            $tpl = sprintf('%s/onlycontent.html.twig', $ext);
+            if ( $onlyContent == 0 )
+            {
+                $tpl = sprintf('%s/content.html.twig', $ext);
+            }
+            return $response->setContent( $app['twig']->render($tpl, $result) );
         })
+        ->value('onlyContent', 0)
         ->bind($randomRouteName);
         $menu_links[] = array( $randomRouteName, $siteParams['title'] . ' Random');
     }

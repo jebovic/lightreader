@@ -15,10 +15,15 @@ function toggleVisibility(e) {
 }
 function showNextItems( url, pageNumber, addContentIn ) {
     o = document.getElementById('loading');
+    
+    if ( pageNumber > 0 )
+        { resource = url + "/" + pageNumber + "/1";}
+    else
+        { resource = url + "/1";}
     o.style.display = 'block';
     r = new XMLHttpRequest();
     d = document.getElementById(addContentIn);
-    r.open("GET", url + "/" + pageNumber + "/1", true);
+    r.open("GET", resource, true);
     r.onreadystatechange = function () {
         if (r.readyState != 4 || r.status != 200) return;
         d.innerHTML = d.innerHTML + r.responseText;
@@ -45,7 +50,8 @@ function isBottom(){
     {
         processing = 1;
         showNextItems( baseURL, pageToLoad, "content");
-        pageToLoad = pageToLoad + 1;
+        if (pageToLoad > 0)
+            { pageToLoad = pageToLoad + 1; }
     }
 }
 
