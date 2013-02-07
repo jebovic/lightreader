@@ -12,6 +12,6 @@
 
 {% block content %}
     {% for item in content %}
-        <div class="item">{{item|raw}}</div>
+        <div class="item" onclick="toggleBM(this);">{{item|raw}}</div>
     {% endfor %}
 {% endblock %}

@@ -4,18 +4,18 @@ function toggleVisibility(e) {
     a = document.getElementById('menuAction');
     if(l.style.display == 'block') {
         l.style.display        = 'none';
-        p.className            = 'collapsed';
+        p.className            = 'shadow collapsed';
         a.firstChild.nodeValue = '+';
     }
     else {
         l.style.display        = 'block';
-        p.className            = 'expanded';
+        p.className            = 'shadow expanded';
         a.firstChild.nodeValue = '-';
     }
 }
 function showNextItems( url, pageNumber, addContentIn ) {
     o = document.getElementById('loading');
-    
+
     if ( pageNumber > 0 )
         { resource = url + "/" + pageNumber + "/1";}
     else
@@ -54,9 +54,9 @@ function isBottom(){
             { pageToLoad = pageToLoad + 1; }
     }
 }
-
+function toggleBM(elem){
+    elem.classList.toggle('bm');
+}
 t = document.getElementById('menuToggle');
 var p = t.parentNode;
-t.addEventListener(
-    'click', toggleVisibility, false
-);
+t.addEventListener('click', toggleVisibility, false);

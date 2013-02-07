@@ -30,7 +30,7 @@ class CurlService
     {
         $this->options = array(
             CURLOPT_REFERER => "http://google.fr",
-            CURLOPT_HEADER => 0,
+            CURLOPT_HEADER => false,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.97 Safari/537.11'
