@@ -1,5 +1,5 @@
-<div id="menu" class="shadow">
-    <a href="/" id="menuToggle" class="collapsed">Sites <span id="menuAction" class="right">+</span></a>
+<div id="menu">
+    <a href="/" id="menuToggle" class="collapsed">Sites</a>
 	<ul id="menuList" class="menuItems">
 		{% for item in app.menu_links %}
 			<li{% if item[0] == page.active %} class="active"{% endif %}>

@@ -34,7 +34,7 @@ function showNextItems( url, pageNumber, addContentIn ) {
 }
 function isBottom(){
     if (processing > 0)
-        { return false; }
+        { return }
 
     var totalHeight, currentScroll, visibleHeight;
     if ( window.pageYOffset != 'undefined')

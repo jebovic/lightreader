@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
-    <div id="loading" class="shadow">Loading</div>
-
     {% block menu %}
         {% include 'mobile/menu.html.twig' %}
     {% endblock %}
@@ -15,7 +13,7 @@
     {% block links %}{% endblock %}
 
     <div id="content"{% if app.config.infiniteScroll == true %} class="nopadding"{% endif %}>{% block content %}{% endblock %}</div>
-
+    <div id="loading"></div>
     {% block javascript %}
         <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
         {% if app.config.infiniteScroll == true %}
