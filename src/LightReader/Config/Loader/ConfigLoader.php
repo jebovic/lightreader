@@ -13,8 +13,8 @@ use LightReader\Config\Validator\AppConfigurationValidator;
 use LightReader\Config\Validator\SitesConfigurationValidator;
 
 /**
-* Load config files helper
-*/
+ * Load config files helper
+ */
 class ConfigLoader
 {
     protected $cachePath;
@@ -25,8 +25,10 @@ class ConfigLoader
 
     /**
      * ConfigLoader constructor
+     *
      * @param string $cachePath         Full path to cache file
      * @param string $yamlFileName      Yaml config file name
+     *
      * @param array  $configDirectories Array of directories where to find some config files
      */
     function __construct($cachePath = false, $yamlFileName = false, $configDirectories = array())
@@ -55,7 +57,9 @@ class ConfigLoader
 
     /**
      * Write cache file into $this->cachePath
+     *
      * @param  ConfigCache $sitesMatcherCache ConfigCache object
+     *
      * @return boolean                        true if cache wroten
      */
     protected function writeCache(ConfigCache $matcherCache)
@@ -96,8 +100,10 @@ class ConfigLoader
 
     /**
      * Generate php code to store in cache file
-     * @param  array  $configValues Array of all config files
-     * @return string               Content to write in cache file
+     *
+     * @param  array $configValues Array of all config files
+     *
+     * @return string Content to write in cache file
      */
     protected function generatePHPCode(array $configValues)
     {
@@ -118,9 +124,11 @@ class ConfigLoader
 
     /**
      * Generate a hash
-     * @param  string $paramName  Parameter name
-     * @param  mixed  $paramValue Parameter value
-     * @return string             Generated hash
+     *
+     * @param string $paramName  Parameter name
+     * @param mixed  $paramValue Parameter value
+     *
+     * @return string Generated hash
      */
     protected function generatePHPArray($paramName, $paramValue)
     {
@@ -142,9 +150,11 @@ class ConfigLoader
 
     /**
      * Generate a hash line for an array
-     * @param  string $paramName  Parameter name
-     * @param  mixed  $paramValue Parameter value
-     * @return string             Generated line for hash
+     *
+     * @param string $paramName  Parameter name
+     * @param mixed  $paramValue Parameter value
+     *
+     * @return string Generated line for hash
      */
     protected function generatePHPLine( $paramName, $paramValue )
     {

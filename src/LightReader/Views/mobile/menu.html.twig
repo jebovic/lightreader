@@ -1,6 +1,6 @@
 <div id="menu">
-    <a href="/" id="menuToggle" class="collapsed">Sites</a>
-	<ul id="menuList" class="menuItems">
+    <a href="/" id="menuToggle" class="collapsed">Menu</a>
+	<ul id="menuList">
 		{% for item in app.menu_links %}
 			<li{% if item[0] == page.active %} class="active"{% endif %}>
 			<a href="{{ app.url_generator.generate( item[0] ) }}">{{ item[1] }}</a></li>

@@ -2,21 +2,39 @@
 
 namespace LightReader\Services\Curl;
 
+/**
+ * Curl helper and shortcuts, fluid interface
+ */
 class CurlService
 {
     private $options;
     private $ressource;
 
+    /**
+     * Options getter
+     *
+     * @return array An array of options
+     */
     public function getOptions() {
         return $this->options;
     }
 
+    /**
+     * Options setter
+     *
+     * @param array $options An array of options
+     */
     public function setOptions($options) {
         $this->options = $options + $this->options;
 
         return $this;
     }
 
+    /**
+     * Options initialization, curl_setopt
+     *
+     * @return CurlService CurlService instance
+     */
     private function initOptions()
     {
         foreach ($this->options as $optName => $optValue )
@@ -26,6 +44,11 @@ class CurlService
         return $this;
     }
 
+    /**
+     * CurlService constructor
+     *
+     * @return CurlService CurlService instance
+     */
     public function __construct()
     {
         $this->options = array(
@@ -39,6 +62,11 @@ class CurlService
         return $this;
     }
 
+    /**
+     * Set proxy options for Curl
+     *
+     * @param array $proxyConfig Proxy options (url, port, user, password)
+     */
     public function setProxy( array $proxyConfig = array() )
     {
         if ( !empty($proxyConfig) && $proxyConfig['url'] != false )
@@ -60,12 +88,22 @@ class CurlService
         return $this;
     }
 
+    /**
+     * Close Curl connection
+     *
+     * @return boolean true
+     */
     public function close()
     {
         curl_close( $this->ressource );
         return true;
     }
 
+    /**
+     * Execute curl request
+     *
+     * @return Curl request result
+     */
     public function grab()
     {
         $this->initOptions();

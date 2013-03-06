@@ -1,37 +1,33 @@
 <!DOCTYPE HTML>
 <html lang="fr">
 <head>
-    <link href="{{ app.request.basepath }}/css/mobile.css" type="text/css" rel="stylesheet" />
     <title>{% block title %}{{ app.config.title }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="{{ app.request.basepath }}/css/mobile.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
     {% block menu %}
         {% include 'mobile/menu.html.twig' %}
     {% endblock %}
 
-    {% block links %}{% endblock %}
-
-    <div id="content"{% if app.config.infiniteScroll == true %} class="nopadding"{% endif %}>{% block content %}{% endblock %}</div>
+    <div id="content">{% block content %}{% endblock %}</div>
     <div id="loading"></div>
     {% block javascript %}
         <script type="text/javascript" src="{{ app.request.basepath }}/js/mobile.js"></script>
-        {% if app.config.infiniteScroll == true %}
-            <script type="text/javascript">
-            var pageToLoad = {{ page.number_next }};
-            var baseURL    = "{{ app.url_generator.generate( page.site_active ) }}";
-            var processing = 0;
-            if(window.addEventListener)
-            {
-                document.addEventListener('scroll', isBottom, false);
-                document.addEventListener('touchend', isBottom, false);
-                document.addEventListener('DOMMouseScroll', isBottom, false);
-            }
-            window.onscroll       = isBottom;
-            document.onmousewheel = isBottom;
-            document.onscroll     = isBottom;
-            </script>
-        {% endif %}
+        <script type="text/javascript">
+        var pageToLoad = {{ page.number_next }};
+        var baseURL    = "{{ app.url_generator.generate( page.site_active ) }}";
+        var processing = 0;
+        if(window.addEventListener)
+        {
+            document.addEventListener('scroll', isBottom, false);
+            document.addEventListener('touchend', isBottom, false);
+            document.addEventListener('DOMMouseScroll', isBottom, false);
+        }
+        window.onscroll       = isBottom;
+        document.onmousewheel = isBottom;
+        document.onscroll     = isBottom;
+        </script>
     {% endblock %}
 </body>
 </html>

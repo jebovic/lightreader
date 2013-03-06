@@ -1,13 +1,7 @@
 {% extends 'mobile/layout.html.twig' %}
 
 {% block title %}
-    {{ parent() }} / {{ page.title }}
-{% endblock %}
-
-{% block links %}
-    {% if app.config.infiniteScroll != true %}
-        {% include 'mobile/links.html.twig' %}
-    {% endif %}
+    {{ page.title }} / {{ parent() }}
 {% endblock %}
 
 {% block content %}

@@ -5,8 +5,16 @@ namespace LightReader\Config\Validator;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
+/**
+ * Configuration validator for application settings
+ */
 class AppConfigurationValidator implements ConfigurationInterface
 {
+    /**
+     * Generates the configuration tree builder.
+     *
+     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
@@ -31,9 +39,6 @@ class AppConfigurationValidator implements ConfigurationInterface
                 ->end()
                 ->scalarNode('randomLink')
                     ->defaultValue('Random')
-                ->end()
-                ->scalarNode('infiniteScroll')
-                    ->defaultValue(true)
                 ->end()
                 ->arrayNode('proxy')
                     ->children()

@@ -61,10 +61,9 @@ You will find the config file fore LightReader in src/LightReader/Config/app.yml
 ```yaml
 title: 'Light Reader'               #Name of application, used for page title and home page H1
 design: 'mobile'                    #Choose a design, available : html|xml|mobile
-nextLink: '&rsaquo;'                #Next link name
-prevLink: '&lsaquo;'                #Previous link name
-randomLink: 'Random'                #Random link name
-infiniteScroll: true                #Set true|false to enable|disable infinite scroll
+nextLink: '&rsaquo;'                #Next link name (unused for mobile)
+prevLink: '&lsaquo;'                #Previous link name (unused for mobile)
+randomLink: 'Random'                #Random link name (unused for mobile)
 proxy:
     url: false                      #Proxy URL, false if not needed
     port: false                     #Proxy port, false if not needed
