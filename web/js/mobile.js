@@ -1,4 +1,4 @@
-function toggleVisibility(e) {
+var toggleVisibility = function(e) {
     e.preventDefault();
     l = document.getElementById('menuList');
     if(l.style.display == 'block') {
@@ -9,8 +9,9 @@ function toggleVisibility(e) {
         l.style.display        = 'block';
         p.className            = 'expanded';
     }
-}
-function showNextItems( url, pageNumber, addContentIn ) {
+};
+
+var showNextItems = function( url, pageNumber, addContentIn ) {
     o = document.getElementById('loading');
 
     if ( pageNumber > 0 )
@@ -28,8 +29,9 @@ function showNextItems( url, pageNumber, addContentIn ) {
         processing = 0;
     };
     r.send();
-}
-function isBottom(){
+};
+
+var isBottom = function(){
     if (processing > 0)
         { return }
 
@@ -50,10 +52,12 @@ function isBottom(){
         if (pageToLoad > 0)
             { pageToLoad = pageToLoad + 1; }
     }
-}
-function toggleBM(elem){
+};
+
+var toggleBM = function(elem){
     elem.classList.toggle('bm');
-}
+};
+
 var t = document.getElementById('menuToggle');
 var p = t.parentNode;
 t.addEventListener('click', toggleVisibility, false);
