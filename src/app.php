@@ -1,22 +1,25 @@
 <?php
 
-use Silex\Provider\UrlGeneratorServiceProvider;
 use LightReader\Config\Loader\ConfigLoader;
+use Silex\Application;
+use Silex\Provider\HttpCacheServiceProvider;
+use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
 // Application initialization
-$app          = new Silex\Application();
+$app          = new Application();
 $app['debug'] = false;
 
 $app->register(new UrlGeneratorServiceProvider());
 
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
+$app->register(new TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/LightReader/Views',
     'twig.autoescape' => false,
 ));
 
-$app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
+$app->register(new HttpCacheServiceProvider(), array(
     'http_cache.cache_dir' => __DIR__.'/../cache/',
     'http_cache.options'   => array(
         'allow_reload'     => true,
