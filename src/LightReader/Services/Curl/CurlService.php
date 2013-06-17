@@ -22,7 +22,8 @@ class CurlService
     /**
      * Options setter
      *
-     * @param array $options An array of options
+     * @param  array $options An array of options
+     * @return CurlService CurlService instance
      */
     public function setOptions($options) {
         $this->options = $options + $this->options;
@@ -66,6 +67,7 @@ class CurlService
      * Set proxy options for Curl
      *
      * @param array $proxyConfig Proxy options (url, port, user, password)
+     * @return CurlService CurlService instance
      */
     public function setProxy( array $proxyConfig = array() )
     {
@@ -102,7 +104,7 @@ class CurlService
     /**
      * Execute curl request
      *
-     * @return Curl request result
+     * @return string request result
      */
     public function grab()
     {
